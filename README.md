@@ -6,4 +6,5 @@ A selection of projects I have worked on in the field of Machine Learning and Ar
 - Generating new faces
 - Recognizing numbers with neural nets
 
-
+## How to run
+The file `environment.yml` describes the conda environment.
