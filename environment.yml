@@ -1,0 +1,9 @@
+name: ai_portfolio
+dependencies:
+  - python=3.11
+  - numpy
+  - matplotlib
+  - scikit-learn
+  - torch
+  - torchvision
+  - tqdm
