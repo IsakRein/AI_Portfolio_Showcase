@@ -23,9 +23,6 @@ def load_dataset():
     return X
 
 def sample_from_normal(X_j_mu, X_j_std):
-
-    
-    # YOUR CODE HERE
     return X_j_mu + X_j_std * np.random.randn(X_j_mu.size)
 
 # INITIALIZATION
