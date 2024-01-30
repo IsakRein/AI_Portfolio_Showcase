@@ -153,7 +153,7 @@ def calculate_nabla_bias(g_l):
 
   
 # initialization = create the layers
-layers = create_layers(layers_list) ### YOUR CODE HERE ###
+layers = create_layers(layers_list) 
 lr = 3.0
 
 # this is one epoch
@@ -175,8 +175,8 @@ for (x, y) in tqdm(train_loader, desc=f'Epoch progress'):
   # ====== do forward propagation =====
   # looping through the layers, computing and storing activations & pre-activations
   for layer in layers[1:]: #since layers[0] does not exist/is None
-    pre_activation = calculate_preactivation(layer.weight, layer.bias, activations[-1]) ### YOUR CODE HERE ###
-    activation = calculate_activation(pre_activation) ### YOUR CODE HERE ###
+    pre_activation = calculate_preactivation(layer.weight, layer.bias, activations[-1]) 
+    activation = calculate_activation(pre_activation) 
     # store these for the backprop
     pre_activations.append(pre_activation)
     activations.append(activation)
@@ -196,16 +196,16 @@ for (x, y) in tqdm(train_loader, desc=f'Epoch progress'):
   for l in range(L-1, 0, -1):
     # g^L is calculated differently, so we check and handle that first
     if l == L-1:
-      g_ls[l] = calculate_g_L(y.squeeze(), activations[l], pre_activations[l]) ### YOUR CODE HERE ###
+      g_ls[l] = calculate_g_L(y.squeeze(), activations[l], pre_activations[l]) 
     else:
-      g_ls[l] = calculate_g_l(g_ls[l+1], layers[l+1].weight, pre_activations[l]) ### YOUR CODE HERE ###
+      g_ls[l] = calculate_g_l(g_ls[l+1], layers[l+1].weight, pre_activations[l]) 
 
-    nabla_weights[l] = calculate_nabla_weight(g_ls[l], activations[l-1]) #### YOUR CODE HERE ###
-    nabla_biases[l] = calculate_nabla_bias(g_ls[l]) ### YOUR CODE HERE ###
+    nabla_weights[l] = calculate_nabla_weight(g_ls[l], activations[l-1]) #
+    nabla_biases[l] = calculate_nabla_bias(g_ls[l]) 
     
     # update the weights with the lr according to SGD algorithm
-    layers[l].weight = layers[l].weight - lr*nabla_weights[l] ### YOUR CODE HERE ###
-    layers[l].bias = layers[l].bias - lr*nabla_biases[l]### YOUR CODE HERE ###
+    layers[l].weight = layers[l].weight - lr*nabla_weights[l] 
+    layers[l].bias = layers[l].bias - lr*nabla_biases[l]
     
     
 # create a forward function for evaluation, without backprop
