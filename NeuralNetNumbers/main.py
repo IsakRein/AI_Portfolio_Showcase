@@ -39,6 +39,13 @@ val_loader = DataLoader(mnist_test, batch_size=1, shuffle=True)
 layers_list = [784, 30, 10]
 L = len(layers_list)
 
+def initialization_scaling(weight_matrix):
+  """
+  This implements Xavier initialization. It helps training of deep networks.
+  """
+  input_size = weight_matrix.shape[0]
+  return weight_matrix / math.sqrt(input_size)
+
 def create_single_layer(input_size: int, output_size: int, scaled_init=False):
   """
   Create a single layer
@@ -229,9 +236,10 @@ accuracy = sum(int(x == y) for (x, y) in test_results)/len(test_results)*100
 print(accuracy)
 
 
-# and show an example
-x, y = next(iter(val_loader))
-x = x.numpy().T
-y = y.numpy().T
-plt.title(f'Prediction is {np.argmax(forward(layers, x))}')
-plt.imshow(x.reshape(28,28), cmap='gray');
+for i in range(10):
+  x, y = next(iter(val_loader))
+  x = x.numpy().T
+  y = y.numpy().T
+  plt.title(f'Prediction is {np.argmax(forward(layers, x))}')
+  plt.imshow(x.reshape(28,28), cmap='gray');
+  plt.savefig(f'examples/prediction_{i}.png')
